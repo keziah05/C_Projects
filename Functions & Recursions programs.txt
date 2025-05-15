@@ -1,0 +1,169 @@
+Q: Using Functions, print Areas of Sqaure, Circle & Rectangle
+
+#include<stdio.h>
+
+int areaSqaure(int s);
+float areaCircle(float r);
+int areaRectangle(int l, int b);
+
+int main(){
+    int s,l,b;
+    float r=4.0;
+    s=l=b=4;
+
+    areaSqaure(s);
+    areaCircle(r);
+    areaRectangle(l,b);
+    
+    printf ("area of Sqaure=%d\n",areaSqaure(s));
+    printf ("are of Circle=%.2f\n",areaCircle(r));
+    printf ("area of Rectangle=%d\n",areaRectangle(l,b));
+
+    return 0;
+}
+
+int areaSqaure(int s){
+   return s*s;
+
+}
+
+float areaCircle(float r){
+   return 3.14*r*r ;
+
+}
+
+int areaRectangle(int l, int b){
+    return l*b;
+}
+
+Q: Using Functions, convert Celsius to Fahrenheit
+
+#include <stdio.h>
+//function prototype
+float convertCel(int c);
+//function call
+int main(){
+      printf("far value: %f",convertCel(0));
+    return 0;
+}
+//function definition
+float convertCel(int c){
+    float far_value= (c*1.8)+32;
+    return far_value;
+}
+
+Q: Using Functions, Calculate the Percentage of Student in Maths, Science & Sanskrit
+
+#include<stdio.h>
+
+float calPercentage (int s, int m, int sk);
+
+int main(){
+    printf("result:%f",calPercentage(95,98,99));
+
+    return 0;
+}
+
+float calPercentage (int s, int m, int sk){
+    float result = (s+m+sk)/300.0*100.0;
+    return result;
+}
+
+Q: Using Recursive Functions, find the sum of N natural numbers.
+
+#include<stdio.h>
+
+int sumNatural(int n);
+
+int main(){
+    int n=5;
+    printf("sum of %d:%d",n,sumNatural(5));
+
+
+    return 0;
+}
+
+int sumNatural(int n){
+    if (n==1){
+        return 1;
+    }
+    int sumNm1= sumNatural(n-1);
+    int sumN = sumNm1 +n;
+    return sumN;
+}
+
+Q: Using Recursive Functions, find the factorial of N.
+
+#include<stdio.h>
+
+int factN(int n);
+
+int main(){
+    int n=5;
+    printf("factorial of %d:%d",n,factN(5));
+
+
+    return 0;
+}
+
+int factN(int n){
+    if (n==1 || n==0){
+        return 1;
+    }
+    int factNm1= factN(n-1);
+    int factN= factNm1*n;
+    return factN;
+}
+
+Q: Using Recursive Functions, print n terms of the Fibonacci series
+
+#include <stdio.h>
+
+int calFib(int n);
+
+int main() {
+    printf("%d", calFib(6)); // Should output 8
+    return 0;
+}
+
+int calFib(int n) {
+    
+        if (n == 0) {
+        return 0;
+    } 
+    if (n == 1) {
+        return 1;
+    }
+    
+
+    int fibNm2 = calFib(n - 2);
+    int fibNm1 = calFib(n - 1);
+    int fibN = fibNm1 + fibNm2;  // ✅ use the already calculated values
+    return fibN;
+}
+
+Q: Using the Recursive Functions, print the nth term of Fibonacci sequence
+
+#include <stdio.h>
+
+int calFib(int n);
+
+int main() {
+    int n;
+    printf("Enter which term of the Fibonacci series you want: ");
+    scanf("%d", &n);
+    printf("The %d term of the Fibonacci Series is :%d\n", n, calFib(n));
+    return 0;
+}
+
+int calFib(int n) {
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return calFib(n - 1) + calFib(n - 2);
+}
+
+
+
+
+
+
