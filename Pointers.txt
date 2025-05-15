@@ -1,0 +1,86 @@
+Q: Predict the output
+
+#include <stdio.h>
+int main(){
+    int x;
+    int *ptr;
+
+
+    ptr=&x;
+    *ptr=0;
+
+    printf("x1=%d\n",x);//0
+    printf("*ptr1=%d\n",*ptr);//0
+    
+    *ptr +=5;
+    printf("x2:%d\n",x);//5
+    printf("ptr2:%d\n",*ptr);//5
+
+    (*ptr)++;
+     printf("x3:%d\n",x);//6
+    printf("ptr3:%d\n",*ptr);//6
+  
+    return 0;
+
+  }
+
+Q: Perform Swapping of Two numbers using "Call by Value"
+
+#include<stdio.h>
+
+void performSwap(int a, int b);
+
+int main(){
+    int a,b;
+    printf("enter a value: ");//a=4
+    scanf("%d",&a);
+    printf("enter b value: ");
+    scanf("%d",&b);//b=5
+    performSwap(a,b);
+    printf("After Swapping\n");
+    printf("a=%d b=%d\n",a,b); //a=4,b=5
+
+    return 0;
+}
+
+void performSwap(int a, int b){
+    int temp=a;
+    a=b;
+    b=temp;
+    printf("Before Swapping\n");
+     printf("a=%d b=%d\n",a,b);//a=5,b=4
+
+
+}
+
+Q: Perform Swapping of Two numbers using "Call by Reference"
+
+#include <stdio.h>
+
+void performSwap(int *a, int *b);
+
+int main() {
+    int a, b;
+
+    printf("Enter a value: ");
+    scanf("%d", &a);
+
+    printf("Enter b value: ");
+    scanf("%d", &b);
+
+    printf("Before Swapping: a = %d, b = %d\n", a, b);
+
+    performSwap(&a, &b); // Pass addresses of a and b
+
+    printf("After Swapping: a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+
+void performSwap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+
