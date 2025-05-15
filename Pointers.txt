@@ -25,6 +25,7 @@ int main(){
   }
 
 Q: Perform Swapping of Two numbers using "Call by Value"
+( It passes a copy of the variable)
 
 #include<stdio.h>
 
@@ -54,6 +55,7 @@ void performSwap(int a, int b){
 }
 
 Q: Perform Swapping of Two numbers using "Call by Reference"
+( It passes Address (pointer) of variable)
 
 #include <stdio.h>
 
