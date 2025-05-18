@@ -1,0 +1,221 @@
+Q: Simple program on Strings
+
+#include<stdio.h>
+int main(){
+
+    char name[]={'K','E','Z','I','A','H','\0'};
+    char _name[]="KEZIAH";
+    printf("1:%s",name);
+    printf("2:%s",_name);
+    return 0;
+}
+
+Q: Create a String FirstName, LastName to store details of the user, print all characters using a loop
+
+#include<stdio.h>
+void printArray(char arr[]);//no need to define size, it will autonmatically terminate at '\0'
+
+int main(){
+    char firstName[]="KEZIAH";
+    char lastName[]="MEKALA";
+    printArray(firstName);
+    printArray(lastName);
+    return 0;
+
+}
+
+void printArray(char arr[]){
+    for (int i=0;arr[i]!='\0';i++){
+        printf("%c\t",arr[i]);
+    }
+    printf("\n");
+}
+
+Q: Need of '&'
+
+#include<stdio.h>
+int main(){
+    char name[100];
+    printf("enter name: ");
+    scanf("%s",name);// no need & because string is an array and an array is pointer which automatically stores the address.For strings (i.e., char arrays),       you do not use & (e.g., scanf("%s", name);) because the array name itself is a pointer. 
+    printf("name:%s",name);
+    return 0;
+    
+}
+
+Q: puts(),gets()
+// not using '&' is not applicable to print words in space between them, to overcome that we use gets() [input] & puts()[output]
+#include<stdio.h>
+int main(){
+    char name[100];
+    gets(name);
+    puts(name);
+    return 0;
+}
+
+#include<stdio.h>
+int main(){
+    char name[100];
+    fgets(name,100,stdin);
+    puts(name);
+    return 0;
+}
+
+Q: Make a program that inputs the user name and prints its length.
+
+#include <stdio.h>
+
+
+void printString(char arr[]);
+int countString(char arr[]);
+
+int main() {
+    char name[100];
+
+    fgets(name, 100, stdin);
+
+   
+
+    printString(name);
+
+    int length = countString(name);// type cast it will return unsigned result
+    printf("\nLength of string: %d\n", length); // it will count the spaces & null character
+
+    return 0;
+}
+
+void printString(char arr[]) {
+    for (int i = 0; arr[i] != '\0'; i++) {
+        printf("%c", arr[i]);
+    }
+}
+
+int countString(char arr[]) {
+    int count = 0;
+    for (int i = 0; arr[i] != '\0'; i++) {
+        count++;
+    }
+    return count;
+}
+
+Q: count the string length using strlen
+
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char name[100],length;
+    printf("enter name: ");
+    scanf("%s",&name);
+    length=strlen(name);
+    printf("length of the string:%d",length);
+    return 0;
+}
+
+Q: Take a string input from the user input using %c.
+
+#include <stdio.h>
+
+int main() {
+    char ch;
+    char str[100];  // Make sure the array has enough space
+    int i = 0;
+
+    while (1) {
+        scanf("%c", &ch);
+        if (ch == '\n')  // Stop when newline is encountered   /// this part acts as gets() function.
+            break;
+        str[i] = ch;
+        i++;
+    }
+
+    str[i] = '\0';  // Null-terminate the string// append at the end of the string
+    puts(str);      // Output the string
+
+    return 0;
+}
+
+Q: Find the salted form of the password entered by the user if the salt is 123 & added at the end.
+#include<stdio.h>
+#include<string.h>
+
+void saltings(char password[]);
+
+int main(){
+    char password[100];
+    fgets(password,100,stdin);//scanf("%s",password);
+    saltings(password);
+
+    return 0;
+
+}
+void saltings(char password[]){
+    char salt[]="123";
+    char newPassword[100];
+
+    strcpy(newPassword,password);
+    strcat(newPassword,salt);
+    puts(newPassword);
+}
+
+Q: Write a function named Slice, which takes a string and returns a sliced string from index n to index m.
+
+#include<stdio.h>
+void slice( char str[],int n,int m);
+
+int main(){
+     char str[]="helloworld";
+     slice(str,3,6);
+    return 0;
+}
+void slice( char str[],int n,int m){
+    int i,j=0;
+    char newStr[100];
+    for (i=n;i<=m;i++,j++){// run the loop from 3 to 6, print the sliced string in newstr.
+        newStr[j]=str[i];
+    }
+    newStr[j]='\0';
+    puts(newStr);
+}
+
+Q: count the no.of vowels in the input string.
+
+#include<stdio.h>
+int countVowels(char str[]);
+
+int main(){
+    char str[]="keziah";
+    countVowels(str);
+    printf("%d",countVowels(str));
+    return 0;
+}
+int countVowels(char str[]){
+    int count=0;
+    for (int i=0;str[i]!='\0';i++){
+        if(str[i]=='a' || str[i]=='e'|| str[i]=='i'|| str[i]=='o'|| str[i]=='u'){
+            count++;
+        }
+    }
+    return count;
+}
+Q: check if the character is present in the given string.
+
+#include <stdio.h>
+
+void checkChar(char str[], char ch);
+
+int main() {
+    char str[] = "ApnaCollege";
+    char ch = 'e';
+    checkChar(str, ch);
+    return 0;
+}
+
+void checkChar(char str[], char ch) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == ch) {
+            printf("Character is present!\n");
+            return;
+        }
+    }
+    printf("Character is NOT present.\n");
+}
