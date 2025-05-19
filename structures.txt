@@ -1,0 +1,354 @@
+Q: simple structures 
+
+#include<stdio.h>
+#include<string.h>
+
+struct student
+{
+  char name[100];
+  int marks;
+  float cgpa;
+};
+
+int main(){
+
+    struct student s1;
+    strcpy(s1.name,"keziah"); // cannot change array size by using '=' which is defines above.
+    s1.marks=97;
+    s1.cgpa=9.0;
+    printf("student name:%s\n",s1.name);
+    printf("marks:%d\n",s1.marks);
+    printf("cgpa:%f",s1.cgpa);
+    return 0;
+    
+    
+}
+
+Q: structures as arrays
+
+ ex1:
+
+#include<stdio.h>
+#include<string.h>
+
+struct student
+{
+  char name[100];
+  int marks;
+  float cgpa;
+};
+
+int main(){
+
+    struct student ece[100];
+    strcpy(ece[0].name,"keziah");
+    ece[0].marks=97;
+    ece[0].cgpa=9.2;
+    printf("name:%s\n",ece[0].name);
+    printf("marks:%d\n",ece[0].marks);
+    printf("cgpa:%f\n",ece[0].cgpa);
+    return 0;
+
+    
+}
+
+ex:2 
+
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    struct student {
+        char name[100];
+        int rollno;
+        float marks;
+    };
+
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    struct student s[n];
+
+    for (i = 0; i < n; i++) {
+        printf("\nEnter details for student %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", s[i].name);  // Use fgets if you want full names with spaces
+        printf("Roll No: ");
+        scanf("%d", &s[i].rollno);
+        printf("Marks: ");
+        scanf("%f", &s[i].marks);
+    }
+
+    printf("\n--- Student Details Entered ---\n");
+    for (i = 0; i < n; i++) {
+        printf("\nStudent %d:\n", i + 1);
+        printf("Name     : %s\n", s[i].name);
+        printf("Roll No  : %d\n", s[i].rollno);
+        printf("Marks    : %.2f\n", s[i].marks);
+    }
+
+    return 0;
+}
+
+
+Q: Pointers using structures
+
+#include<stdio.h>
+#include<string.h>
+
+struct student
+{
+  char name[100];
+  int marks;
+  float cgpa;
+};
+
+int main(){
+
+    struct student s1;
+    strcpy(s1.name,"keziah");
+    s1.marks=97;
+    s1.cgpa=9.2;
+    struct student *ptr=&s1;
+    printf("marks:%d\n",(*ptr).marks); /// can also write ptr ->marks
+
+    printf("name:%s\n",s1.name);
+    printf("marks:%d\n",s1.marks);
+    printf("cgpa:%f\n",s1.cgpa);
+    return 0;
+
+    
+}
+
+Q: Reading student data from keyboard using structures.
+
+#include <stdio.h>
+
+struct student {
+    char name[100];
+    int rollno;
+    float marks;
+};
+
+int main() {
+    struct student s1;
+
+    printf("Enter Student Details\n");
+
+    printf("Name: ");
+    scanf("%s", s1.name); // Removed '&' because name is already an array
+
+    printf("Roll No: ");
+    scanf("%d", &s1.rollno);
+
+    printf("Marks: ");
+    scanf("%f", &s1.marks); // Removed "%.2f" — it should be just "%f" in scanf
+
+    printf("\nStudent Details\n");
+    printf("Student Name: %s\n", s1.name);
+    printf("Register No.: %d\n", s1.rollno);
+    printf("Marks Secured: %.2f\n", s1.marks); // Use "%.2f" in printf, not scanf
+
+    return 0;
+}
+
+Q: Functions using structures.
+
+-- Passing structure members to function
+
+#include <stdio.h>
+
+struct student
+{
+    char name[100];
+    int rollno;
+    float marks;
+};
+
+void printInfo(char name[], int rollno, float marks);
+
+int main() {
+    struct student s1 = {"keziah", 95, 95.0};
+    printInfo(s1.name, s1.rollno, s1.marks);
+    return 0;
+}
+
+void printInfo( char name[], int rollno, float marks) {
+    printf("Name: %s\n", name);
+    printf("Roll No: %d\n", rollno);
+    printf("Marks: %.2f\n", marks);
+}
+
+--- Passing entire structure to function
+#include <stdio.h>
+
+struct student
+{
+    char name[100];
+    int rollno;
+    float marks;
+};
+
+void printInfo(struct student stu);
+
+int main() {
+    struct student s1 = {"keziah", 95, 95.0};
+    printInfo(s1);
+    return 0;
+}
+
+void printInfo( struct student stu){
+  printf("Name: %s\n", stu.name);
+    printf("Roll No: %d\n", stu.rollno);
+    printf("Marks: %.2f\n", stu.marks);
+
+}
+
+--- to check whether it is call by value or call by reference
+#include <stdio.h>
+
+struct student
+{
+    char name[100];
+    int rollno;
+    float marks;
+};
+
+void printInfo(struct student *stu);
+
+int main() {
+    struct student s1 = {"keziah", 95, 95.0};
+    s1.rollno=23;//changes
+    printInfo(&s1);
+    return 0;
+}
+
+void printInfo( struct student *stu){
+  printf("Name: %s\n", (*stu).name);
+    printf("Roll No: %d\n", (*stu).rollno);
+    printf("Marks: %.2f\n", (*stu).marks);
+
+    (*stu).rollno=23; /// does not change because it is call by value
+
+}
+Q: Enter Address( houseno, block, city & state) of 5 people.
+
+#include <stdio.h>
+
+typedef struct { //act as alias or short name for lengthen struct name
+    int houseno;
+    int block;
+    char city[100];
+    char state[100];
+} Address;
+
+int main() {
+    Address a1[5];
+
+    // Input
+    for (int i = 0; i < 5; i++) {
+        printf("\nEnter Address of person %d\n", i + 1);
+        
+        printf("House No: ");
+        scanf("%d", &a1[i].houseno);
+        
+        printf("Block: ");
+        scanf("%d", &a1[i].block);
+        
+        printf("City: ");
+        scanf(" %s", a1[i].city);  // Space before %s avoids input issues
+        
+        printf("State: ");
+        scanf(" %s", a1[i].state);
+    }
+
+    // Output
+    printf("\n--- Address Details Entered ---\n");
+    for (int i = 0; i < 5; i++) {
+        printf("\nAddress %d:\n", i + 1);
+        printf("House No : %d\n", a1[i].houseno);
+        printf("Block    : %d\n", a1[i].block);
+        printf("City     : %s\n", a1[i].city);
+        printf("State    : %s\n", a1[i].state);
+    }
+
+    return 0;
+}
+Q: Create a function to store vectors. Then return the sum of 2 vectors.
+
+#include <stdio.h>
+
+struct vector {
+    int x;
+    int y;//x and y represent the components of the vector.
+
+You calculate the sum of two such vectors component-wise (i.e., x₁ + x₂ and y₁ + y₂).
+
+The result is another vector, not a single number.
+
+
+};
+
+// Pass 'sum' by reference
+void calcSum(struct vector v1, struct vector v2, struct vector *sum);
+
+int main() {
+    struct vector v1 = {5, 10};
+    struct vector v2 = {3, 7};
+    struct vector sum = {0};
+
+    calcSum(v1, v2, &sum);  // Pass address of 'sum'
+
+    printf("Sum of x is: %d\n", sum.x);
+    printf("Sum of y is: %d\n", sum.y);
+
+    return 0;
+}
+
+// Accept 'sum' as a pointer
+void calcSum(struct vector v1, struct vector v2, struct vector *sum) {
+    sum->x = v1.x + v2.x;
+    sum->y = v1.y + v2.y;
+}
+
+Q: Create a structure to store complex numbers. use arrow pointers,
+
+#include <stdio.h>
+
+struct complex {
+    int x; // real part
+    int y; // imaginary part
+};
+
+int main() {
+    struct complex c1 = {5, 3};
+    struct complex *ptr = &c1; //You create a pointer ptr pointing to c1.
+
+    printf("Real part: %d\n", ptr->x);  // same as (*ptr).x
+    printf("Imaginary part: %d\n", ptr->y);  // same as (*ptr).y
+
+    return 0;
+}
+
+Q: Create a structure to store Bank Details. Make use of alias(typedef)
+
+#include<stdio.h>
+typedef struct bankAccount
+{
+  int accno;
+  char accname[100];
+}acc;
+
+
+int main(){
+  acc a1 ={123,"keziah"};
+  acc a2={124,"keren"};
+  printf("account 1 details: %d %s\n",a1.accno,a1.accname);
+  printf("account 2 details: %d %s",a2.accno,a2.accname);
+  return 0;
+}
+
+
+
+
