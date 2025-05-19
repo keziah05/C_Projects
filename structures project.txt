@@ -1,0 +1,180 @@
+Q: Make a system that can store information of all students, teachers & staff of your college in the form of structures.
+#include <stdio.h>
+
+// ------------------ Structure Definitions ------------------
+
+struct Student {
+    int rollNo;
+    char name[100];
+    float cgpa;
+    int attendance; // percentage
+};
+
+struct Teacher {
+    int id;
+    char name[100];
+    char subject[50];
+};
+
+struct Staff {
+    int id;
+    char name[100];
+    char department[50];
+};
+
+// ------------------ Function Declarations ------------------
+
+void inputStudent(struct Student *s);
+void displayStudent(struct Student s);
+void inputTeacher(struct Teacher *t);
+void displayTeacher(struct Teacher t);
+void inputStaff(struct Staff *sf);
+void displayStaff(struct Staff sf);
+
+// ------------------ Main Function ------------------
+
+int main() {
+    struct Student students[2];
+    struct Teacher teachers[2];
+    struct Staff staffs[2];
+
+    printf("------ Enter Student Details ------\n");
+    for (int i = 0; i < 2; i++) {
+        printf("\nStudent %d:\n", i + 1);
+        inputStudent(&students[i]);
+    }
+
+    printf("\n------ Enter Teacher Details ------\n");
+    for (int i = 0; i < 2; i++) {
+        printf("\nTeacher %d:\n", i + 1);
+        inputTeacher(&teachers[i]);
+    }
+
+    printf("\n------ Enter Staff Details ------\n");
+    for (int i = 0; i < 2; i++) {
+        printf("\nStaff %d:\n", i + 1);
+        inputStaff(&staffs[i]);
+    }
+
+    printf("\n\n========= Stored Data =========\n");
+
+    printf("\n--- Students ---\n");
+    for (int i = 0; i < 2; i++) {
+        displayStudent(students[i]);
+    }
+
+    printf("\n--- Teachers ---\n");
+    for (int i = 0; i < 2; i++) {
+        displayTeacher(teachers[i]);
+    }
+
+    printf("\n--- Staff ---\n");
+    for (int i = 0; i < 2; i++) {
+        displayStaff(staffs[i]);
+    }
+
+    return 0;
+}
+
+// ------------------ Function Definitions ------------------
+
+void inputStudent(struct Student *s) {
+    printf("Enter Roll No: ");
+    scanf("%d", &s->rollNo);
+    printf("Enter Name: ");
+    scanf("%s", s->name);
+    printf("Enter CGPA: ");
+    scanf("%f", &s->cgpa);
+    printf("Enter Attendance (%%): ");
+    scanf("%d", &s->attendance);
+}
+
+void displayStudent(struct Student s) {
+    printf("Roll No: %d, Name: %s, CGPA: %.2f, Attendance: %d%%\n",
+           s.rollNo, s.name, s.cgpa, s.attendance);
+}
+
+void inputTeacher(struct Teacher *t) {
+    printf("Enter ID: ");
+    scanf("%d", &t->id);
+    printf("Enter Name: ");
+    scanf("%s", t->name);
+    printf("Enter Subject: ");
+    scanf("%s", t->subject);
+}
+
+void displayTeacher(struct Teacher t) {
+    printf("ID: %d, Name: %s, Subject: %s\n", t.id, t.name, t.subject);
+}
+
+void inputStaff(struct Staff *sf) {
+    printf("Enter ID: ");
+    scanf("%d", &sf->id);
+    printf("Enter Name: ");
+    scanf("%s", sf->name);
+    printf("Enter Department: ");
+    scanf("%s", sf->department);
+}
+
+void displayStaff(struct Staff sf) {
+    printf("ID: %d, Name: %s, Department: %s\n", sf.id, sf.name, sf.department);
+}
+
+""SAMPLE OUTPUT""
+------ Enter Student Details ------
+
+Student 1:
+Enter Roll No: 101
+Enter Name: Alice
+Enter CGPA: 9.2
+Enter Attendance (%): 95
+
+Student 2:
+Enter Roll No: 102
+Enter Name: Bob
+Enter CGPA: 8.5
+Enter Attendance (%): 88
+
+------ Enter Teacher Details ------
+
+Teacher 1:
+Enter ID: 201
+Enter Name: Smith
+Enter Subject: Math
+
+Teacher 2:
+Enter ID: 202
+Enter Name: John
+Enter Subject: Physics
+
+------ Enter Staff Details ------
+
+Staff 1:
+Enter ID: 301
+Enter Name: Anu
+Enter Department: Library
+
+Staff 2:
+Enter ID: 302
+Enter Name: Ravi
+Enter Department: Admin
+
+
+========= Stored Data =========
+
+--- Students ---
+Roll No: 101, Name: Alice, CGPA: 9.20, Attendance: 95%
+Roll No: 102, Name: Bob, CGPA: 8.50, Attendance: 88%
+
+--- Teachers ---
+ID: 201, Name: Smith, Subject: Math
+ID: 202, Name: John, Subject: Physics
+
+--- Staff ---
+ID: 301, Name: Anu, Department: Library
+ID: 302, Name: Ravi, Department: Admin
+
+
+
+
+
