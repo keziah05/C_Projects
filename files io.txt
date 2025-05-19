@@ -1,0 +1,369 @@
+files = read op + write op.
+
+syntax: FILE *fptr;
+fptr=fopen("filename","mode");//opening a file
+fclose(fptr);//closing a file
+
+1. while mode = read, if file does not exit, it return a NULL pointer.
+2. while mode=write, if file does not exist, it will create a new file page.
+
+reading & writing from and to a file respectively,
+read:  char ch;
+fscanf(fptr,"%c",&ch); //scanf always used to store and read data.
+
+write: char ch='A';
+fprintf(fptr,"%c",ch);
+
+
+reading & writing character from and to a file respectively,
+read: fgetc(fptr);
+write: fputc('A',fptr);
+
+reading & writing string from and to a file respectively,
+
+read: fgets(str, size, fptr);
+
+Reads a string from the file into the variable str
+Example: fgets(str, 100, fptr);
+
+write:fputs(str, fptr);
+
+Writes the string str to the file
+Example: fputs("Hello World", fptr);
+
+
+
+Q: simple program to open and close file.
+
+#include <stdio.h>
+
+int main(){
+  FILE *fptr;
+  fptr = fopen("NO.txt","r");
+  if (fptr==NULL){
+    printf("File doesn't exist.");
+  } 
+  else{
+     fclose(fptr);
+  }
+  
+ 
+  return 0;
+}
+
+
+Q: reading from file.
+
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "r");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    char ch;
+    fscanf(fptr, "%c", &ch);
+    printf("Character: %c\n", ch);
+
+    fclose(fptr);
+    return 0;
+}
+
+Q: writing to a file.
+
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "w");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    
+    fprintf(fptr,"%c",'M');
+    fprintf(fptr,"%c",'A');
+    fprintf(fptr,"%c",'N');
+    fprintf(fptr,"%c",'G');
+    fprintf(fptr,"%c",'O');
+
+    fclose(fptr);
+    return 0;
+}
+
+ Q: writing to file. 
+// If you need spaces, use double quotes and %s:
+fprintf(fptr, "%s", "A N G");
+
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "a");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    
+    fprintf(fptr,"%c",'M');
+    fprintf(fptr,"%c",'A');
+    fprintf(fptr,"%c",'N');
+    fprintf(fptr,"%c",'G');
+    fprintf(fptr,"%c",'O');
+
+    fclose(fptr);
+    return 0;
+}
+
+Q: reading a character from a file.
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "r");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+    printf("%c\n",fgetc(fptr));
+        printf("%c\n",fgetc(fptr));    
+        printf("%c\n",fgetc(fptr));
+            printf("%c\n",fgetc(fptr));
+                printf("%c\n",fgetc(fptr));
+
+    
+    
+
+  }
+Q: writing a character to a file.
+
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "w");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+   fputc('M',fptr);
+   fputc('A',fptr);  
+    fputc('N',fptr);
+       fputc('G',fptr);
+          fputc('O',fptr);
+    
+    
+
+  }
+
+Q: read a text file character by character and prints its content to the screen.(using EOF)
+// fgetc return EOF to show that file has ended.
+
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "r");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    char ch;
+    ch = fgetc(fptr);
+
+    while (ch != EOF) {
+        printf("%c", ch);
+        ch = fgetc(fptr); // Read next character //i++
+    }
+
+    fclose(fptr); // Always close the file after you're done
+    return 0;
+}
+
+Q: Make a program to input student information from a user & enter it in a file.
+
+#include<stdio.h>
+
+int main(){
+FILE *fptr;
+fptr=fopen("Student.txt","w");
+char name[100];
+int rollno;
+printf("enter name: ");
+scanf("%s",name);
+printf("enter rollnoll: ");
+scanf("%d",&rollno);
+fprintf(fptr,"%c\t",name);
+fprintf(fptr,"%d\t",rollno);
+fclose(fptr);
+return 0;
+}
+
+Q: Write a program to write all the odd numbers from 1 to n in a file.
+
+#include<stdio.h>
+int main(){
+  FILE *fptr;
+  fptr=fopen("Odd.txt","w");
+
+  int n;
+  printf("enter n value: ");
+  scanf("%d",&n);
+
+  for (int i=1;i<=n;i++){
+    if (i%2!=0){
+      fprintf(fptr,"%d\n",i);
+    }
+
+  }
+  fclose(fptr);
+
+}
+
+Q:  2 numbers - a&b, are written in a file. write a program to replace them withe their sum. (first read and then replace using write)
+
+#include<stdio.h>
+
+int main() {
+    FILE *fptr;
+    fptr = fopen("Test.txt", "r"); //write numbers before in test.txt
+
+    int a;
+    fscanf(fptr, "%d", &a);
+    int b;
+    fscanf(fptr, "%d", &b);
+
+    fclose(fptr);
+
+    fptr = fopen("Test.txt", "w");
+    fprintf(fptr, "%d", a + b);
+    fclose(fptr);
+    
+    return 0;
+}
+
+Q:  Write a program to read a string from a file & output to the user.
+#include <stdio.h>
+
+int main() {
+    FILE *fptr;
+    char str[100];
+
+    fptr = fopen("file.txt", "r");
+
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    fgets(str, 100, fptr);  // Reads the line from file //100 or sizeof(str)
+    printf("String from file: %s\n", str);
+
+    fclose(fptr);
+    return 0;
+}
+
+Q: Replace the data in file of Q(a) with the number of vowels in the string.
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    FILE *fptr;
+    char str[100];
+    int vowels = 0;
+
+    // Open file for reading
+    fptr = fopen("file.txt", "r");
+    if (fptr == NULL) {
+        printf("File not found.\n");
+        return 1;
+    }
+
+    fgets(str, sizeof(str), fptr);  // Read the whole line from file
+    fclose(fptr);  // Close the read file
+
+    // Count vowels in the string
+    for (int i = 0; str[i] != '\0'; i++) { 
+
+//char ch = tolower(str[i]); // Make it case-insensitive
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            vowels++;
+//The tolower function in C converts an uppercase character to its lowercase equivalent. It is defined in the ctype.h header file. If the character is not an uppercase letter, it returns the original character unchanged. 
+
+
+        if (str[i]== 'a' || str[i] == 'e' || str[i] == 'i' || str[i]== 'o' || str[i]== 'u') {
+            vowels++;        }
+    }
+
+    // Open file for writing (will overwrite)
+    fptr = fopen("file.txt", "w");
+    if (fptr == NULL) {
+        printf("File not found for writing.\n");
+        return 1;
+    }
+
+    fprintf(fptr, "Number of vowels: %d", vowels);
+    fclose(fptr);
+
+    return 0;
+}
+
+
+Q: Format the information of 5 students (name, marks, cgpa, course) in a table like structure in a file.
+#include <stdio.h>
+
+
+struct Student {
+    char name[50];
+    int marks;
+    float cgpa;
+    char course[30];
+};
+
+int main() {
+    struct Student s[5];
+    FILE *fptr;
+
+    fptr = fopen("students.txt", "w");
+
+    if (fptr == NULL) {
+        printf("File error.\n");
+        return 1;
+    }
+
+    // Input 5 students' data
+    for (int i = 0; i < 5; i++) {
+        printf("Enter name, marks, cgpa, course for student %d:\n", i + 1);
+        scanf("%s %d %f %s", s[i].name, &s[i].marks, &s[i].cgpa, s[i].course);
+    }
+
+    // Print table header
+    fprintf(fptr, "%-15s %-10s %-10s %-10s\n", "Name", "Marks", "CGPA", "Course");
+
+    // Print student data
+    for (int i = 0; i < 5; i++) {
+        fprintf(fptr, "%-15s %-10d %-10.2f %-10s\n", s[i].name, s[i].marks, s[i].cgpa, s[i].course);
+    }
+
+    fclose(fptr);
+    return 0;
+}
+
+
+  
+
+
+
