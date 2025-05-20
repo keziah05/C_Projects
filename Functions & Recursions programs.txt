@@ -91,6 +91,7 @@ int sumNatural(int n){
     int sumN = sumNm1 +n;
     return sumN;
 }
+// recursive functions should always have a base value to end recursion at a particular position.
 
 Q: Using Recursive Functions, find the factorial of N.
 
