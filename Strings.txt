@@ -72,7 +72,7 @@ int countString(char arr[]);
 int main() {
     char name[100];
 
-    fgets(name, 100, stdin);
+    fgets(name, 100, stdin); // enter name
 
    
 
@@ -120,7 +120,13 @@ int main() {
     char str[100];  // Make sure the array has enough space
     int i = 0;
 
-    while (1) {
+    while (1) { 
+
+//1-- true
+// 🔁 while(1) in C means:
+"Loop forever" — unless you break out of it manually.
+
+
         scanf("%c", &ch);
         if (ch == '\n')  // Stop when newline is encountered   /// this part acts as gets() function.
             break;
