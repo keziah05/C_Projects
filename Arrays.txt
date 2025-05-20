@@ -176,7 +176,15 @@ Q: Using multidimensional array, print tables of 2 & 3
 
 #include <stdio.h>
 
-void printTables(int arr[][10], int n, int m, int number);
+void printTables(int arr[][10], int n, int m, int number); 
+// n rows , m columns.
+// first block does not size allocations it is by default a pointer, second block iis not pointer need to allocate size for that.n= r
+// ✅ In a 2D array parameter like int arr[][10]:
+
+The first dimension ([]) doesn't need to specify a size because the array decays to a pointer to the first row. So yes, it behaves like a pointer.
+
+The second dimension ([10]) must be specified so the compiler knows how many columns are in each row — this is needed to correctly compute memory offsets when accessing elements like arr[i][j].
+
 
 int main() {
     int arr[2][10]; // Declare a 2x10 array
